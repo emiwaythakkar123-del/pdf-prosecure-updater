@@ -36,11 +36,18 @@ if uploaded_file is not None:
                     
                     st.success("Processing complete!")
                     
+                    # Generate new filename: Replace "Prudent" with "Prosecure"
+                    original_name = uploaded_file.name
+                    new_name = original_name.replace("Prudent", "Prosecure")
+                    # Fallback if "Prudent" wasn't in the name, just prepend "Prosecure_"
+                    if new_name == original_name:
+                         new_name = f"Prosecure_{original_name}"
+
                     # Download button
                     st.download_button(
                         label="Download Updated PDF",
                         data=output_bytes,
-                        file_name="Prudent_Morning_Coffee_Rebranded.pdf",
+                        file_name=new_name,
                         mime="application/pdf"
                     )
                 except Exception as e:
